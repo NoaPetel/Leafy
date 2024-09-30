@@ -13,8 +13,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.arrosageplante.MainDestinations.LOGIN_ROUTE
+import com.example.arrosageplante.MainDestinations.MENU_ROUTE
+import com.example.arrosageplante.MainDestinations.SIGNIN_ROUTE
 import com.example.arrosageplante.login.LoginScreen
+import com.example.arrosageplante.menu.MenuScreen
 import com.example.arrosageplante.signin.SignInScreen
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -35,12 +40,25 @@ fun MainNavGraph(
         composable(
             MainDestinations.LOGIN_ROUTE,
         ){
-            LoginScreen()
+            LoginScreen(
+                onNavigateToSignIn = { navController.navigate(route = SIGNIN_ROUTE) },
+                onNavigateToMenu = {navController.navigate(route = MENU_ROUTE)}
+            )
+
         }
         composable(
             MainDestinations.SIGNIN_ROUTE,
         ){
-            SignInScreen()
+            SignInScreen(
+                onNavigateToLogIn = { navController.navigate(route = LOGIN_ROUTE)},
+            )
+        }
+        composable(
+            MainDestinations.MENU_ROUTE
+        ){
+            MenuScreen(
+
+            )
         }
     }
 }

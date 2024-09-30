@@ -26,25 +26,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.google.firebase.auth.FirebaseAuth
 
+val auth: FirebaseAuth by lazy {
+    FirebaseAuth.getInstance()
+}
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToSignIn: () -> Unit,
+    onNavigateToMenu: () -> Unit
 ){
 
 
     Scaffold { paddingValues ->
         LoginContent(
-            modifier = modifier.padding(paddingValues)
+            modifier = modifier.padding(paddingValues),
+            onNavigateToSignIn = onNavigateToSignIn,
+            onNavigateToMenu = onNavigateToMenu
         )
     }
 }
 
 @Composable
 private fun LoginContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToSignIn: () -> Unit,
+    onNavigateToMenu: () -> Unit
 ){
     var mail by remember { mutableStateOf("")}
     var password by remember { mutableStateOf("")}
@@ -76,11 +86,13 @@ private fun LoginContent(
             modifier = modifier.fillMaxWidth()
             )
 
+        val onFailure: (Exception) -> Unit = {}
         Button(
             modifier = modifier
                 .fillMaxWidth(),
             onClick = {
-                Log.d("ViewLogin", "Bouton cliqué")
+                signIn(email = mail, password = password, onSuccess = onNavigateToMenu, onFailure = onFailure)
+                Log.d("ViewLogin", "Connexion cliqué")
             }
         ) {
             Text(text = "Connexion")
@@ -106,10 +118,22 @@ private fun LoginContent(
             modifier = modifier
                 .fillMaxWidth(),
             onClick = {
-                Log.d("ViewLogin", "Bouton cliqué")
+                onNavigateToSignIn();
+                Log.d("ViewLogin", "Créer compte cliqué")
             }
         ) {
             Text(text = "Créer un compte")
         }
     }
+}
+
+fun signIn(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+    auth.signInWithEmailAndPassword(email, password)
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                onSuccess()
+            } else {
+                task.exception?.let { onFailure(it) }
+            }
+        }
 }

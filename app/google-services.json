@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1080920332536",
+    "project_id": "arrosageplante-7a117",
+    "storage_bucket": "arrosageplante-7a117.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080920332536:android:b6cbe23dd2a3a6a6db830d",
+        "android_client_info": {
+          "package_name": "com.example.arrosageplante"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaSYXXUdAbkUcSqiLQEkYfLpFcrgTWlVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
