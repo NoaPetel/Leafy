@@ -98,5 +98,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-analytics")
 
+    //Splashscreen
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
 
 }

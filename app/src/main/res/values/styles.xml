@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Base.AppTheme" />
+
+    <style name="Base.AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Définit l'icône du splash screen -->
+        <item name="windowSplashScreenBackground"> @color/purple_200 </item> <!-- Couleur d'arrière-plan -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item> <!-- Icône animée -->
+    </style>
+</resources>
