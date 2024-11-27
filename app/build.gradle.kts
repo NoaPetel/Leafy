@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {
@@ -108,8 +108,6 @@ dependencies {
     // Navigation Bar
     implementation("androidx.compose.material3:material3:1.3.1")
 
-    // Material (BottomNavBar)
-    implementation("androidx.compose.material:material:1.7.5")
 
 
 }

@@ -20,6 +20,7 @@ import com.example.arrosageplante.MainDestinations.SIGNIN_ROUTE
 import com.example.arrosageplante.login.LoginScreen
 import com.example.arrosageplante.menu.MenuScreen
 import com.example.arrosageplante.signin.SignInScreen
+import com.example.arrosageplante.utils.AppModalDrawer
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 
@@ -28,6 +29,7 @@ fun MainNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
+    drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
     startDestination: String = MainDestinations.LOGIN_ROUTE,
     navActions: MainNavigationActions = remember(navController) {
         MainNavigationActions(navController)
@@ -59,7 +61,11 @@ fun MainNavGraph(
         }
         composable(
             MainDestinations.MENU_ROUTE
-        ){
+        ){ entry ->
+            AppModalDrawer(drawerState, currentRoute, navActions) { }
+                MenuScreen(
+
+                )
 
         }
     }

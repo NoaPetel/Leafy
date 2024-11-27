@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.arrosageplante.utils.AppModalDrawer
 
 @Composable
 fun MenuScreen(
@@ -46,6 +47,7 @@ fun MenuContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Titre
+
         Text(
             text = "Informations Météo",
             modifier = Modifier.padding(bottom = 16.dp)
