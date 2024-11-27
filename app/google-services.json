@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "1080920332536",
-    "project_id": "arrosageplante-7a117",
-    "storage_bucket": "arrosageplante-7a117.appspot.com"
+    "project_number": "897302890516",
+    "firebase_url": "https://watering-system-fbde9-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "watering-system-fbde9",
+    "storage_bucket": "watering-system-fbde9.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1080920332536:android:b6cbe23dd2a3a6a6db830d",
+        "mobilesdk_app_id": "1:897302890516:android:760ac5289642b590efbf01",
         "android_client_info": {
           "package_name": "com.example.arrosageplante"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAaSYXXUdAbkUcSqiLQEkYfLpFcrgTWlVM"
+          "current_key": "AIzaSyCSenSHapX9uLjMqtr6-WMoKXtHVu34UNg"
         }
       ],
       "services": {

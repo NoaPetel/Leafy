@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
     packaging {
         resources {
@@ -67,6 +67,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.fragment)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,6 +81,7 @@ dependencies {
 
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
 
+    implementation("com.google.android.material:material:1.7.0")
 
     val nav_version = "2.8.1"
     // Jetpack Compose Integration
@@ -94,12 +99,17 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
 
     // FireBase
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-analytics")
 
     //Splashscreen
     implementation("androidx.core:core-splashscreen:1.0.0")
+
+    // Navigation Bar
+    implementation("androidx.compose.material3:material3:1.3.1")
+
+    // Material (BottomNavBar)
+    implementation("androidx.compose.material:material:1.7.5")
 
 
 }
