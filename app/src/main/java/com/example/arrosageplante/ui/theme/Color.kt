@@ -13,3 +13,6 @@ val Pink40 = Color(0xFF7D5260)
 val primaryDarkColor = Color(0xff0d3c21)
 val secondaryDarkColor = Color(0xff16452a)
 val TextColor = Color(0x00000000)
+
+val primaryLightColor = Color(0xffccebd9) // A light green matching the tone of primaryDarkColor
+val secondaryLightColor = Color(0xffd8f3e4) // A lighter green for secondaryDarkColor

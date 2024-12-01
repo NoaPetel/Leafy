@@ -8,11 +8,11 @@ plugins {
 
 android {
     namespace = "com.example.arrosageplante"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.arrosageplante"
-        minSdk = 24
+        minSdk = 25
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -52,6 +52,7 @@ android {
     }
 }
 
+
 dependencies {
 
 
@@ -71,6 +72,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.media3.common.ktx)
+    implementation(libs.firebase.firestore.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -107,6 +112,13 @@ dependencies {
 
     // Navigation Bar
     implementation("androidx.compose.material3:material3:1.3.1")
+
+    // Graph
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+
+
+
 
 
 
