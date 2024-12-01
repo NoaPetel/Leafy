@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.media3.common.ktx)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.datastore.core.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -115,6 +116,8 @@ dependencies {
 
     // Graph
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
 
 

@@ -10,8 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
@@ -42,9 +45,10 @@ fun SettingsScreen(
 ) {
     val userData by userViewModel.userData.collectAsStateWithLifecycle()
     val isDarkTheme by themeViewModel.isDarkTheme.collectAsState(false)
+
     Scaffold(
         topBar = {
-            SettingsTopAppBar ( openDrawer = openDrawer)
+            SettingsTopAppBar (openDrawer = openDrawer)
         }
     ) { paddingValues ->
         Column(
@@ -56,12 +60,44 @@ fun SettingsScreen(
             // User Information Section
             Text("Informations du compte", style = MaterialTheme.typography.titleMedium)
 
-            userData?.let { user ->
+            if (userData != null) {
                 SettingsItem(
                     title = "Email",
-                    value = user.email
+                    value = userData?.email ?: "Email non disponible"
+                )
+            } else {
+                Text(
+                    text = "Aucune information utilisateur disponible",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.error
                 )
             }
+
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Préférences", style = MaterialTheme.typography.titleMedium)
+
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                thickness = 1.dp
+            )
+
+            SettingsSwitch(
+                title = "Mode sombre",
+                checked = isDarkTheme,
+                onCheckedChange = {
+                    Log.d("Settings","Toggled")
+                    themeViewModel.toggleTheme()
+                }
+
+            )
+
+
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                thickness = 1.dp
+            )
 
             // Logout Button
             Button(
@@ -74,29 +110,6 @@ fun SettingsScreen(
             ) {
                 Text("Déconnexion")
             }
-
-            // Additional Settings Sections
-            Spacer(modifier = Modifier.height(16.dp))
-            Text("Préférences", style = MaterialTheme.typography.titleMedium)
-
-            // Example toggle switches
-            var notificationsEnabled by remember { mutableStateOf(false) }
-
-//            SettingsSwitch(
-//                title = "Notifications",
-//                checked = notificationsEnabled,
-//                onCheckedChange = { notificationsEnabled = it }
-//            )
-
-            SettingsSwitch(
-                title = "Mode sombre",
-                checked = isDarkTheme,
-                onCheckedChange = {
-                    Log.d("Settings","Toggled")
-                    themeViewModel.toggleTheme();
-                }
-
-            )
         }
     }
 }

@@ -100,7 +100,7 @@ fun MainNavGraph(
                         onNavigateToLogIn = { navActions.navigateToLogIn() },
                         openDrawer = {
                             Log.d("Drawer", "Open")
-                            coroutineScope.launch { drawerState.open() } },
+                            coroutineScope.launch { drawerState.open() } }
                     )
                 })
 

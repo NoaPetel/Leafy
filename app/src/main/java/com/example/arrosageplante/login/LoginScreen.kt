@@ -187,8 +187,16 @@ fun signIn(email: String, password: String, onSuccess: () -> Unit, onFailure: (E
                 userViewModel.setUserData(auth.currentUser)
                 onSuccess()
             } else {
-                task.exception?.let { onFailure(it) }
+                val errorMessage = when (task.exception) {
+                    is FirebaseAuthInvalidCredentialsException -> "Invalid email or password"
+                    is FirebaseAuthInvalidUserException -> "User account does not exist"
+                    else -> "Sign-in failed: ${task.exception?.message}"
+                }
+                Log.e("SignIn", errorMessage)
+                onFailure(task.exception ?: Exception("Unknown sign-in error"))
             }
+
+
         }
 }
 
