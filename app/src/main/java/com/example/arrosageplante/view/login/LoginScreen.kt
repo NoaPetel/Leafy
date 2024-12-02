@@ -1,4 +1,4 @@
-package com.example.arrosageplante.login
+package com.example.arrosageplante.view.login
 
 import android.annotation.SuppressLint
 import android.util.Log

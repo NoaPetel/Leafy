@@ -1,4 +1,4 @@
-package com.example.arrosageplante.signin
+package com.example.arrosageplante.view.signin
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement

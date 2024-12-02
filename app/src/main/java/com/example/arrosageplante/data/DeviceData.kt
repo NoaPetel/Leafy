@@ -64,7 +64,32 @@ fun updatePumpStatus(pumpOn: Boolean, devicePath: String = "devices/esp32_1") {
         }
 }
 
-fun saveWateringFrequency(frequency: Int, enable: Boolean) {
+
+
+fun saveWateringFrequency(frequency: Int, enable: Boolean, devicePath: String = "devices/esp32_1") {
+
+
+    // Get Firebase Database reference
+    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    val myRef: DatabaseReference = database.getReference(devicePath)
+
+    // Create a map to update only the pumpOn field
+    val updates = mapOf(
+        "numHour" to frequency * 24,
+        "automaticplantingOn" to enable)
+
+    // Update the database
+    myRef.updateChildren(updates)
+        .addOnSuccessListener {
+            Log.d("Frequency", "Frequency and WateringBool changed")
+        }
+        .addOnFailureListener { exception ->
+            Log.e("PumpControl", "Failed to update pump status", exception)
+        }
+}
+
+// Fonction pour sauvegarder les données dans le FireStore
+fun saveWateringFrequencyFireStore(frequency: Int, enable: Boolean) {
 
 
     val db = FirebaseFirestore.getInstance()

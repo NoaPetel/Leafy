@@ -1,4 +1,4 @@
-package com.example.arrosageplante.settings
+package com.example.arrosageplante.view.settings
 
 import android.content.res.Resources.Theme
 import android.util.Log
@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -32,6 +34,7 @@ import com.example.arrosageplante.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.arrosageplante.ui.theme.TextColor
 import com.example.arrosageplante.viewmodel.ThemeViewModel
 import com.example.arrosageplante.utils.SettingsTopAppBar
 
@@ -106,7 +109,10 @@ fun SettingsScreen(
                     // Sign out the user
                     FirebaseAuth.getInstance().signOut()
                     onNavigateToLogIn()
-                }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = TextColor
+                )
             ) {
                 Text("Déconnexion")
             }

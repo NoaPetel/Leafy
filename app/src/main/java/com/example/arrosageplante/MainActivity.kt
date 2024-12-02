@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
 
             val isDarkTheme by themeViewModel.isDarkTheme.collectAsState()
 
-            ArrosagePlanteTheme(darkTheme = isDarkTheme) {
+            ArrosagePlanteTheme(darkTheme = !isDarkTheme) {
                 Surface(color = MaterialTheme.colorScheme.background){
                     MainNavGraph()
                 }

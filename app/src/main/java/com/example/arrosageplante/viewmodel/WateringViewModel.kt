@@ -23,7 +23,6 @@ class WateringViewModel : ViewModel() {
     private fun loadWateringFrequency() {
         viewModelScope.launch {
             _isLoading.value = true
-            // TODO: Replace this with actual data fetching from your data source
             _wateringFrequency.value = fetchWateringFrequencyFromDataSource()
             _isLoading.value = false
         }
@@ -32,16 +31,13 @@ class WateringViewModel : ViewModel() {
     fun setWateringFrequency(frequency: Int, enable: Boolean) {
         viewModelScope.launch {
             _isLoading.value = true
-            // TODO: Replace this with actual data saving to your data source
             saveWateringFrequencyToDataSource(frequency, enable)
             _wateringFrequency.value = frequency
             _isLoading.value = false
         }
     }
 
-    // Placeholder functions for data operations
     private suspend fun fetchWateringFrequencyFromDataSource(): Int {
-        // TODO: Implement actual data fetching logic
         return 0
     }
 

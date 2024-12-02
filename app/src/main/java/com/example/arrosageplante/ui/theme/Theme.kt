@@ -23,13 +23,13 @@ import com.example.arrosageplante.R
 private val DarkColorScheme = darkColorScheme(
     primary = primaryDarkColor,
     secondary = secondaryDarkColor,
-    tertiary = Pink80
+    tertiary = secondaryDarkColor,
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = primaryLightColor,
     secondary = secondaryLightColor,
-    tertiary = Pink40
+    tertiary = secondaryDarkColor
 
 )
 

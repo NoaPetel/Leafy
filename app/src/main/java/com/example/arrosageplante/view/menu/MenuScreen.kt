@@ -1,4 +1,4 @@
-package com.example.arrosageplante.menu
+package com.example.arrosageplante.view.menu
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -18,6 +18,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,10 @@ import androidx.compose.ui.unit.sp
 import com.example.arrosageplante.data.DeviceData
 import com.example.arrosageplante.data.fetchDeviceData
 import com.example.arrosageplante.data.updatePumpStatus
+import com.example.arrosageplante.ui.theme.TextColor
+import com.example.arrosageplante.ui.theme.cardColor
+import com.example.arrosageplante.ui.theme.primaryDarkColor
+import com.example.arrosageplante.ui.theme.secondaryDarkColor
 import com.example.arrosageplante.utils.ConnectionButton
 import com.example.arrosageplante.utils.MenuTopAppBar
 import com.google.android.material.resources.MaterialAttributes
@@ -83,16 +88,16 @@ fun MenuContent(
                 DataCardContent(
                     title = "Humidité",
                     value = "${deviceData.value.humidity} %",
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    containerColor = darkColorScheme().primary,
+                    contentColor = TextColor
                 )
             },
             secondCardContent = {
                 DataCardContent(
                     title = "Température ",
                     value = "${deviceData.value.temperature} °C",
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    containerColor = darkColorScheme().primary,
+                    contentColor = TextColor
                 )
             }
         )
@@ -104,16 +109,16 @@ fun MenuContent(
                 DataCardContent(
                     title = "Humidité du sol",
                     value = "${deviceData.value.soilMoisture} %",
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    containerColor = primaryDarkColor,
+                    contentColor = TextColor
                 )
             },
             secondCardContent = {
                 DataCardContent(
                     title = "Niveau d'eau",
                     value = "${deviceData.value.waterlvl} %",
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    containerColor = darkColorScheme().primary,
+                    contentColor = TextColor
                 )
             }
         )
@@ -127,14 +132,14 @@ fun MenuContent(
                 ActionCardContent(
                     text = "Arroser la plante",
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    contentColor = TextColor,
                 )
             },
             secondCardContent = {
                 ActionCardContent(
                     text = "Régler une fréquence d'arrosage",
                     containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    contentColor = TextColor
                 )
             },
             firstCardAction = { updatePumpStatus(true) },
@@ -169,7 +174,10 @@ fun DataCardsRow(
     ) {
         Card(
             modifier = Modifier.weight(1f),
-            colors = CardDefaults.cardColors()
+            colors = CardDefaults.cardColors(
+                containerColor = cardColor,
+                contentColor = TextColor
+            )
         ) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -184,7 +192,10 @@ fun DataCardsRow(
 
         Card(
             modifier = Modifier.weight(1f),
-            colors = CardDefaults.cardColors()
+            colors = CardDefaults.cardColors(
+                containerColor = cardColor,
+                contentColor = TextColor
+            )
         ) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -213,7 +224,11 @@ fun ActionCardsRow(
         Card(
             modifier = Modifier
                 .weight(1f)
-                .clickable(onClick = firstCardAction)
+                .clickable(onClick = firstCardAction),
+            colors = CardDefaults.cardColors(
+                containerColor = cardColor,
+                contentColor = TextColor
+            )
         ) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -229,7 +244,11 @@ fun ActionCardsRow(
         Card(
             modifier = Modifier
                 .weight(1f)
-                .clickable(onClick = secondCardAction)
+                .clickable(onClick = secondCardAction),
+            colors = CardDefaults.cardColors(
+                containerColor = cardColor,
+                contentColor = TextColor
+            )
         ) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -248,8 +267,8 @@ fun ActionCardsRow(
 fun DataCardContent(
     title: String,
     value: String? = null,
-    containerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surface,
-    contentColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface
+    containerColor: androidx.compose.ui.graphics.Color = primaryDarkColor,
+    contentColor: androidx.compose.ui.graphics.Color = primaryDarkColor
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -272,37 +291,10 @@ fun DataCardContent(
 }
 
 @Composable
-fun ActionCard(
-    text: String,
-    containerColor: Color = MaterialTheme.colorScheme.surface,
-    contentColor: Color = MaterialTheme.colorScheme.onSurface,
-    action: () -> Unit,
-    content: @Composable () -> Unit
-) {
-    Card(
-        modifier = Modifier.clickable(onClick = action),
-        colors = CardDefaults.cardColors(
-            containerColor = containerColor,
-            contentColor = contentColor
-        )
-    ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(128.dp)
-                .padding(8.dp)
-        ) {
-            content()
-        }
-    }
-}
-
-@Composable
 fun ActionCardContent(
     text: String,
-    containerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surface,
-    contentColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
+    containerColor: androidx.compose.ui.graphics.Color = primaryDarkColor,
+    contentColor: androidx.compose.ui.graphics.Color = secondaryDarkColor,
 ) {
     Text(
         text = text,

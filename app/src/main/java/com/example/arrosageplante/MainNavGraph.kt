@@ -14,16 +14,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.arrosageplante.login.LoginScreen
+import com.example.arrosageplante.view.login.LoginScreen
 import com.example.arrosageplante.viewmodel.UserViewModel
-import com.example.arrosageplante.menu.MenuScreen
-import com.example.arrosageplante.newDevice.NewDeviceTaskScreen
-import com.example.arrosageplante.settings.SettingsScreen
-import com.example.arrosageplante.signin.SignInScreen
+import com.example.arrosageplante.view.menu.MenuScreen
+import com.example.arrosageplante.view.newDevice.NewDeviceScreen
+import com.example.arrosageplante.view.settings.SettingsScreen
+import com.example.arrosageplante.view.signin.SignInScreen
 import com.example.arrosageplante.viewmodel.ThemeViewModel
 import com.example.arrosageplante.utils.AppModalDrawer
 import com.example.arrosageplante.viewmodel.WateringViewModel
-import com.example.arrosageplante.watering.WateringScreen
+import com.example.arrosageplante.view.watering.WateringScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -109,7 +109,7 @@ fun MainNavGraph(
         composable(
             MainDestinations.NEWDEVICE_ROUTE
         ) {
-            NewDeviceTaskScreen (
+            NewDeviceScreen (
                 onNavigateToMenu = { navActions.navigateToMenu() }
             )
         }
