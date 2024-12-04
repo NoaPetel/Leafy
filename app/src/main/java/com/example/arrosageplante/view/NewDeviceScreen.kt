@@ -1,4 +1,4 @@
-package com.example.arrosageplante.view.newDevice
+package com.example.arrosageplante.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

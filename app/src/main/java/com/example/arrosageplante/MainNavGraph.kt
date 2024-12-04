@@ -14,16 +14,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.arrosageplante.view.login.LoginScreen
+import com.example.arrosageplante.view.LoginScreen
 import com.example.arrosageplante.viewmodel.UserViewModel
-import com.example.arrosageplante.view.menu.MenuScreen
-import com.example.arrosageplante.view.newDevice.NewDeviceScreen
-import com.example.arrosageplante.view.settings.SettingsScreen
-import com.example.arrosageplante.view.signin.SignInScreen
-import com.example.arrosageplante.viewmodel.ThemeViewModel
+import com.example.arrosageplante.view.MenuScreen
+import com.example.arrosageplante.view.NewDeviceScreen
+import com.example.arrosageplante.view.SettingsScreen
+import com.example.arrosageplante.view.SignInScreen
 import com.example.arrosageplante.utils.AppModalDrawer
+import com.example.arrosageplante.view.GraphScreen
 import com.example.arrosageplante.viewmodel.WateringViewModel
-import com.example.arrosageplante.view.watering.WateringScreen
+import com.example.arrosageplante.view.WateringScreen
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -44,6 +45,10 @@ fun MainNavGraph(
     val userViewModel: UserViewModel = UserViewModel()
     val wateringViewModel: WateringViewModel = WateringViewModel()
 
+    val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
+
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -56,7 +61,8 @@ fun MainNavGraph(
             LoginScreen(
                 onNavigateToSignIn = { navActions.navigateToSignIn() },
                 onNavigateToMenu = {navActions.navigateToMenu()},
-                userViewModel = userViewModel
+                userViewModel = userViewModel,
+                auth = auth
             )
 
         }
@@ -66,6 +72,7 @@ fun MainNavGraph(
         ){
             SignInScreen(
                 onNavigateToLogIn = { navActions.navigateToLogIn()},
+                auth = auth
             )
         }
 
@@ -83,6 +90,7 @@ fun MainNavGraph(
                             coroutineScope.launch { drawerState.open() } },
                         onNavigateToNewDevice = { navActions.navigateToNewDevice() },
                         onNavigateToWatering = { navActions.navigateToWatering() },
+                        onNavigateToGraph = { navActions.navigateToGraph()}
                     )
                 })
         }
@@ -120,6 +128,14 @@ fun MainNavGraph(
             WateringScreen (
                 onNavigateToMenu = { navActions.navigateToMenu() },
                 wateringViewModel = wateringViewModel
+            )
+        }
+
+        composable(
+            MainDestinations.GRAPH_ROUTE
+        ) {
+            GraphScreen (
+                onNavigateToMenu = { navActions.navigateToMenu() }
             )
         }
     }

@@ -1,12 +1,14 @@
 package com.example.arrosageplante
 
 import androidx.navigation.NavHostController
+import com.example.arrosageplante.MainDestinations.GRAPH_ROUTE
 import com.example.arrosageplante.MainDestinations.LOGIN_ROUTE
 import com.example.arrosageplante.MainDestinations.MENU_ROUTE
 import com.example.arrosageplante.MainDestinations.NEWDEVICE_ROUTE
 import com.example.arrosageplante.MainDestinations.SETTINGS_ROUTE
 import com.example.arrosageplante.MainDestinations.SIGNIN_ROUTE
 import com.example.arrosageplante.MainDestinations.WATERING_ROUTE
+import com.example.arrosageplante.MainScreens.GRAPH_SCREEN
 import com.example.arrosageplante.MainScreens.LOGIN_SCREEN
 import com.example.arrosageplante.MainScreens.MENU_SCREEN
 import com.example.arrosageplante.MainScreens.NEWDEVICE_SCREEN
@@ -21,6 +23,7 @@ private object MainScreens {
     const val SETTINGS_SCREEN = "settings"
     const val NEWDEVICE_SCREEN = "newDevice"
     const val WATERING_SCREEN = "watering"
+    const val GRAPH_SCREEN = "graph"
 }
 
 object MainsDestinationsArgs {
@@ -34,6 +37,7 @@ object MainDestinations {
     const val SETTINGS_ROUTE = SETTINGS_SCREEN
     const val NEWDEVICE_ROUTE = NEWDEVICE_SCREEN
     const val WATERING_ROUTE = WATERING_SCREEN
+    const val GRAPH_ROUTE = GRAPH_SCREEN
 }
 
 class MainNavigationActions(private val navController: NavHostController){
@@ -59,5 +63,9 @@ class MainNavigationActions(private val navController: NavHostController){
 
     fun navigateToWatering(){
         navController.navigate(route = WATERING_ROUTE)
+    }
+
+    fun navigateToGraph(){
+        navController.navigate(route = GRAPH_ROUTE)
     }
 }

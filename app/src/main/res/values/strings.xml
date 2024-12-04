@@ -7,5 +7,6 @@
     <string name="header_drawer"> Header image</string>
     <string name="navigation_view_header_title"> Leafy </string>
     <string name="open_drawer"> Open Drawer </string>
+    <string name="back_menu"> Back to Menu </string>
 
 </resources>

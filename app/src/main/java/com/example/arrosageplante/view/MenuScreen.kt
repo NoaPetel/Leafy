@@ -1,4 +1,4 @@
-package com.example.arrosageplante.view.menu
+package com.example.arrosageplante.view
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,7 +23,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,18 +37,14 @@ import com.example.arrosageplante.ui.theme.primaryDarkColor
 import com.example.arrosageplante.ui.theme.secondaryDarkColor
 import com.example.arrosageplante.utils.ConnectionButton
 import com.example.arrosageplante.utils.MenuTopAppBar
-import com.google.android.material.resources.MaterialAttributes
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.sql.Connection
 
 @Composable
 fun MenuScreen(
     modifier: Modifier = Modifier,
     openDrawer: () -> Unit,
     onNavigateToNewDevice: () -> Unit,
-    onNavigateToWatering: () -> Unit
+    onNavigateToWatering: () -> Unit,
+    onNavigateToGraph: () -> Unit,
 ) {
     Scaffold(
         topBar = { MenuTopAppBar(openDrawer = openDrawer) },
@@ -58,7 +52,9 @@ fun MenuScreen(
     ) { paddingValue ->
         MenuContent(
             modifier = modifier.padding(paddingValue),
-            onNavigateToWatering = onNavigateToWatering)
+            onNavigateToWatering = onNavigateToWatering,
+            onNavigateToGraph = onNavigateToGraph
+        )
     }
 }
 
@@ -66,12 +62,12 @@ fun MenuScreen(
 @Composable
 fun MenuContent(
     modifier: Modifier = Modifier,
-    onNavigateToWatering: () -> Unit
+    onNavigateToWatering: () -> Unit,
+    onNavigateToGraph: () -> Unit
 ) {
     val deviceData = remember { mutableStateOf(DeviceData()) }
 
     fetchDeviceData { data ->
-        Log.d("Menu", "$data")
         deviceData.value = data
     }
 
@@ -99,7 +95,8 @@ fun MenuContent(
                     containerColor = darkColorScheme().primary,
                     contentColor = TextColor
                 )
-            }
+            },
+            onNavigateToGraph = onNavigateToGraph
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -108,7 +105,7 @@ fun MenuContent(
             firstCardContent = {
                 DataCardContent(
                     title = "Humidité du sol",
-                    value = "${deviceData.value.soilMoisture} %",
+                    value = "${deviceData.value.soilmoisture} %",
                     containerColor = primaryDarkColor,
                     contentColor = TextColor
                 )
@@ -120,7 +117,8 @@ fun MenuContent(
                     containerColor = darkColorScheme().primary,
                     contentColor = TextColor
                 )
-            }
+            },
+            onNavigateToGraph = onNavigateToGraph
         )
 
         Spacer(modifier = Modifier.height(64.dp)) // Add space between sections
@@ -166,7 +164,8 @@ fun SectionTitle(text: String) {
 @Composable
 fun DataCardsRow(
     firstCardContent: @Composable () -> Unit,
-    secondCardContent: @Composable () -> Unit
+    secondCardContent: @Composable () -> Unit,
+    onNavigateToGraph: () -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -177,7 +176,8 @@ fun DataCardsRow(
             colors = CardDefaults.cardColors(
                 containerColor = cardColor,
                 contentColor = TextColor
-            )
+            ),
+            onClick = onNavigateToGraph
         ) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -195,7 +195,8 @@ fun DataCardsRow(
             colors = CardDefaults.cardColors(
                 containerColor = cardColor,
                 contentColor = TextColor
-            )
+            ),
+            onClick = onNavigateToGraph
         ) {
             Box(
                 contentAlignment = Alignment.Center,

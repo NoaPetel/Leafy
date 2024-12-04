@@ -1,5 +1,6 @@
 package com.example.arrosageplante.utils
 
+import android.graphics.Color
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -10,23 +11,39 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 
 @Composable
-fun TemperatureChart(temperatureList: List<Double>) {
+fun LineChart(
+    modifier: Modifier = Modifier,
+    entries: List<Entry>,
+    label: String
+) {
     AndroidView(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         factory = { context ->
             LineChart(context).apply {
-                val entries = temperatureList.mapIndexed { index, temp ->
-                    Entry(index.toFloat(), temp.toFloat())
-                }
-
-                val dataSet = LineDataSet(entries, "Températures")
-                dataSet.setColor(0xFF6200EE.toInt()) // Couleur de la courbe
-                dataSet.setDrawValues(false) // Ne pas afficher les valeurs sur le graphique
-
-                val lineData = LineData(dataSet)
-                this.data = lineData
-                this.invalidate() // Rafraîchir le graphique
+                // Configure chart appearance
+                setNoDataText("No data available")
+                description.isEnabled = false
+                setTouchEnabled(true)
+                isDragEnabled = true
+                setScaleEnabled(true)
+                setPinchZoom(true)
             }
+        },
+        update = { chart ->
+            // Create dataset
+            val dataSet = LineDataSet(entries, label).apply {
+                color = Color.BLUE
+                valueTextColor = Color.WHITE
+                lineWidth = 2f
+                setCircleColor(Color.BLUE)
+                setDrawCircleHole(false)
+                setDrawValues(false)
+            }
+
+            // Set data to chart
+            val lineData = LineData(dataSet)
+            chart.data = lineData
+            chart.invalidate() // Refresh chart
         }
     )
 }

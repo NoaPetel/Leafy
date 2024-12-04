@@ -1,4 +1,4 @@
-package com.example.arrosageplante.view.login
+package com.example.arrosageplante.view
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -37,17 +37,14 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import kotlinx.coroutines.launch
 
-val auth: FirebaseAuth by lazy {
-    FirebaseAuth.getInstance()
-}
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
     onNavigateToSignIn: () -> Unit,
     onNavigateToMenu: () -> Unit,
-    userViewModel: UserViewModel
+    userViewModel: UserViewModel,
+    auth: FirebaseAuth
 ){
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -62,7 +59,8 @@ fun LoginScreen(
             onNavigateToSignIn = onNavigateToSignIn,
             onNavigateToMenu = onNavigateToMenu,
             userViewModel = userViewModel,
-            snackbarHostState = snackbarHostState
+            snackbarHostState = snackbarHostState,
+            auth = auth
         )
     }
 }
@@ -73,7 +71,8 @@ private fun LoginContent(
     onNavigateToSignIn: () -> Unit,
     onNavigateToMenu: () -> Unit,
     userViewModel: UserViewModel,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    auth: FirebaseAuth
 ){
     var mail by remember { mutableStateOf("")}
     var password by remember { mutableStateOf("")}
@@ -136,7 +135,9 @@ private fun LoginContent(
                             )
                         }
                     },
-                    userViewModel = userViewModel)
+                    userViewModel = userViewModel,
+                    auth = auth
+                )
                 Log.d("ViewLogin", "Connexion cliqué")
             }
         ) {
@@ -171,7 +172,7 @@ private fun LoginContent(
     }
 }
 
-fun signIn(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit, userViewModel: UserViewModel) {
+fun signIn(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit, userViewModel: UserViewModel, auth: FirebaseAuth) {
 
     if (email.isBlank() || password.isBlank()) {
         val emptyCredentialsException = Exception("Email or password cannot be empty")

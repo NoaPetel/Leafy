@@ -1,6 +1,5 @@
-package com.example.arrosageplante.view.signin
+package com.example.arrosageplante.view
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +9,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,21 +20,21 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.google.firebase.auth.FirebaseAuth
 
-val auth: FirebaseAuth by lazy {
-    FirebaseAuth.getInstance()
-}
+
 
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,
     onNavigateToLogIn: () -> Unit,
+    auth: FirebaseAuth
 
 ){
 
     Scaffold { paddingValue ->
         SignInContent(
             modifier = modifier.padding(paddingValue),
-            onNavigateToLogIn = onNavigateToLogIn
+            onNavigateToLogIn = onNavigateToLogIn,
+            auth = auth
             )
     }
 
@@ -45,7 +43,8 @@ fun SignInScreen(
 @Composable
 fun SignInContent(
     modifier: Modifier = Modifier,
-    onNavigateToLogIn: () -> Unit
+    onNavigateToLogIn: () -> Unit,
+    auth: FirebaseAuth
 ) {
 
     var mail by remember { mutableStateOf("") }
@@ -100,7 +99,7 @@ fun SignInContent(
 
         val onFailure: (Exception) -> Unit = {}
         Button(
-            onClick = { signUp(email = mail, password = password, onSuccess = onNavigateToLogIn, onFailure = onFailure) }
+            onClick = { signUp(email = mail, password = password, onSuccess = onNavigateToLogIn, onFailure = onFailure, auth = auth) }
         ) {
             Text("Valider les informations")
         }
@@ -108,7 +107,7 @@ fun SignInContent(
         }
     }
 
-fun signUp(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+fun signUp(email: String, password: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit, auth: FirebaseAuth) {
     auth.createUserWithEmailAndPassword(email, password)
         .addOnCompleteListener { task ->
             if (task.isSuccessful) {
