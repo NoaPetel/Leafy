@@ -34,7 +34,7 @@ fun MainNavGraph(
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
-    startDestination: String = MainDestinations.MENU_ROUTE,
+    startDestination: String = MainDestinations.LOGIN_ROUTE,
     navActions: MainNavigationActions = remember(navController) {
         MainNavigationActions(navController)
     }
